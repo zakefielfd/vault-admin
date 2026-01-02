@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Backup Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="terminal">
+    <div class="screen">
+        <div class="scanlines"></div>
+        <div class="content">
+            <h1>BACKUP MANAGEMENT</h1>
+            <p><a href="/">← MAIN MENU</a> | <a href="{{ url_for('logout') }}">LOGOUT</a></p>
+            <hr>
+            <p><strong>Status:</strong> <span style="color: {{ color }}; font-size: 32px;">{{ status }} {{ pid_text }}</span></p>
+            <hr>
+
+            {% if message %}
+            <div style="text-align: center; padding: 40px; background: rgba(0,50,0,0.8); border: 5px solid lime; margin: 50px 0;">
+                <p style="color: yellow; font-size: 36px;">>>> {{ message }} <<<</p>
+                {% if vaultboy_success %}
+                <img src="{{ url_for('static', filename='images/vaultboy_success.gif') }}" alt="Success" style="max-width: 500px; margin: 40px 0;">
+                <p style="color: lime; font-size: 32px;">EXCELLENT WORK, OVERSEER!</p>
+                {% endif %}
+                {% if vaultboy_fail %}
+                <img src="{{ url_for('static', filename='images/vaultboy_fail.png') }}" alt="Fail" style="max-width: 500px; margin: 40px 0;">
+                <p style="color: red; font-size: 32px;">MISSION FAILED...</p>
+                {% endif %}
+            </div>
+            <p style="text-align: center; color: lime;">→ Refresh or go to menu to clear ←</p>
+            {% endif %}
+
+            <form method="post" style="text-align: center; margin: 60px 0;">
+                <input type="submit" value="RUN BACKUP NOW">
+            </form>
+
+            <p>Script: ~/backupscript/backupscript.sh</p>
+        </div>
+    </div>
+</body>
+</html>

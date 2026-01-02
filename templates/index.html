@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astraserver - Vault-Tec Terminal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+</head>
+<body class="terminal">
+    <div class="screen">
+        <div class="scanlines"></div>
+        <div class="content">
+            <h1>VAULT-TEC UNIFIED OPERATING SYSTEM</h1>
+            <p>COPYRIGHT 2077 VAULT-TEC INDUSTRIES</p>
+            <p>WELCOME TO YOUR VAULT CONTROL TERMINAL, OVERSEER GUILLEM</p>
+            <p><a href="{{ url_for('logout') }}">LOGOUT</a></p>
+            <hr>
+
+            <!-- Mensaje transitorio: desaparece al recargar -->
+            {% if message %}
+            <div style="background: rgba(0, 50, 0, 0.6); padding: 30px; margin: 40px 0; border: 3px solid #00ff00; text-align: center; border-radius: 15px;">
+                <p style="color: yellow; font-size: 32px; font-weight: bold;">>>> {{ message }} <<<</p>
+                
+                {% if vaultboy_success %}
+                <img src="{{ url_for('static', filename='images/vaultboy_success.gif') }}" alt="Vault Boy Approved!" style="max-width: 400px; margin-top: 30px; border: 5px solid #00ff00; border-radius: 20px;">
+                <p style="color: yellow; font-size: 28px; font-weight: bold; margin-top: 30px;">EXCELLENT WORK, OVERSEER!</p>
+                {% endif %}
+                
+                {% if vaultboy_fail %}
+                <img src="{{ url_for('static', filename='images/vaultboy_fail.gif') }}" alt="Vault Boy Sad" style="max-width: 350px; margin-top: 30px; border: 5px solid #ff0000; border-radius: 20px;">
+                <p style="color: #ff4444; font-size: 28px; font-weight: bold; margin-top: 30px;">MISSION FAILED...</p>
+                {% endif %}
+            </div>
+            <hr>
+            <p style="color: lime; text-align: center;">PRESS F5 TO CLEAR MESSAGE AND CONTINUE</p>
+            <hr>
+            {% endif %}
+
+            <h2>MAIN MENU - USE ARROW KEYS ↑↓ AND ENTER</h2>
+
+            <div class="menu">
+                <div class="menu-item">
+                    <h3>> 1. DISK STATUS</h3>
+                    <pre>{{ lsblk }}</pre>
+                </div>
+
+                <div class="menu-item">
+                    <h3>> 2. DOCKER CONTAINERS</h3>
+                    <pre>{{ docker_ps }}</pre>
+                    <div style="margin: 20px 0;">
+                        <label>Container: <input type="text" name="container" placeholder="e.g. jellyfin" required></label>
+                        <input type="submit" name="action" value="START" form="docker-form">
+                        <input type="submit" name="action" value="STOP" form="docker-form">
+                        <input type="submit" name="action" value="RESTART" form="docker-form">
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <h3>> 3. NETWORK CONFIGURATION</h3>
+                    <pre>{{ ip_a }}</pre>
+                </div>
+
+                <div class="menu-item">
+                    <h3>> 4. SYSTEM STATISTICS</h3>
+                    <pre>{{ disk }}</pre>
+                    <p><strong>Memory:</strong> {{ mem_info }}</p>
+                    <p><strong>CPU:</strong> {{ cpu_info }}</p>
+                    <pre>{{ processes }}</pre>
+                </div>
+
+                <div class="menu-item">
+                    <h3>> 5. DOCKER LOGS</h3>
+                    <pre>{{ logs }}</pre>
+                </div>
+
+                <div class="menu-item">
+                    <h3>> 6. BACKUP MANAGEMENT</h3>
+                    <p><strong>Status:</strong> <span style="color: {{ backup_color }}; font-weight: bold; font-size: 20px;">{{ backup_status }} {{ backup_pid_text }}</span></p>
+                    <button type="submit" name="backup" style="font-size: 26px; padding: 20px 50px; background: #00ff00; color: #000; font-weight: bold;">RUN BACKUP NOW</button>
+                </div>
+            </div>
+
+            <form id="docker-form" method="post" style="display: none;"></form>
+            <form method="post" style="display: none;"></form> <!-- Para el backup -->
+
+            <hr>
+            <p style="text-align: center;">END OF LINE.</p>
+        </div>
+    </div>
+</body>
+</html>

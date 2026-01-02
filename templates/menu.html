@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vault-Tec Main Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="terminal">
+    <div class="screen">
+        <div class="scanlines"></div>
+        <div class="content">
+            <h1>VAULT-TEC UNIFIED OPERATING SYSTEM</h1>
+            <p>WELCOME, OVERSEER GUILLEM</p>
+            <p><a href="{{ url_for('logout') }}">LOGOUT</a></p>
+            <hr>
+            <h2>MAIN MENU</h2>
+            
+            <div class="menu-option"><a href="/disk">1. DISK STATUS</a></div>
+            <div class="menu-option"><a href="/docker">2. DOCKER CONTROL</a></div>
+            <div class="menu-option"><a href="/network">3. NETWORK CONFIGURATION</a></div>
+            <div class="menu-option"><a href="/stats">4. SYSTEM STATISTICS</a></div>
+            <div class="menu-option"><a href="/logs">5. DOCKER LOGS</a></div>
+            <div class="menu-option"><a href="/backup">6. BACKUP MANAGEMENT</a></div>
+            
+            <hr>
+            <p style="font-size: 24px;">TAB TO SELECT • ENTER TO ACTIVATE • ARROWS TO SCROLL</p>
+        </div>
+    </div>
+</body>
+</html>

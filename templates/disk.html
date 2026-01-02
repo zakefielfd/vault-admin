@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disk Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="terminal">
+    <div class="screen">
+        <div class="scanlines"></div>
+        <div class="content">
+            <h1>DISK STATUS</h1>
+            <p><a href="/">← MAIN MENU</a> | <a href="{{ url_for('logout') }}">LOGOUT</a></p>
+            <hr>
+            <pre>{{ lsblk }}</pre>
+            <hr>
+            <p>Disk usage:</p>
+            <pre>{{ df }}</pre>
+        </div>
+    </div>
+</body>
+</html>
