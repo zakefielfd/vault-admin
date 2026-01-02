@@ -1,5 +1,4 @@
 # vault-admin
-Fallout-themed web administration panel for monitoring and managing a Linux homelab server.
 
 Fallout Vault-Tec styled web dashboard for monitoring and basic administration of my Linux homelab server.
 
